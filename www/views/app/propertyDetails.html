@@ -1,0 +1,575 @@
+<ion-view title="Update ME">
+  <ion-content > 
+	
+	<div id="image">
+		<img class="category-image" ng-src="http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/uploads/{{image.FileName}}" 
+			 ng-click="getAllImages()" spinner-on-load>
+	 <div class="categories-list">
+      <div ng-repeat="propertyImage_item in allImages" class="col">
+        <a class="feed-category">
+          <pre-img ratio="_1_1" helper-class="square-image">
+            <img class="category-image" ng-src="http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/uploads/{{propertyImage_item.FileName}}" spinner-on-load>
+          </pre-img>
+          <div class="category-bg"></div>
+          <span class="category-title">{{propertyImage_item.PropertyName}}</span>
+        </a>
+      </div>
+    </div>
+	</div>
+	
+	<!-- START Purchase -->
+	<div id="purchase">
+		<h3>Purchase And Sale</h3>
+		
+		<div class="item">        
+	        <div>
+	          <span class="title text_type_bold">Property Name</span>
+	          <p class="description">
+	          	{{purchaseAndSale['PropertyName']}}         
+	          </p>
+	          <i ng-show="isHasPurchaseFile" ng-click="getFile(purchaseAndSale['PropertyId'], 22)" ui-sref="app.slider" 
+         	   	 class="icon ion-android-document pointer">
+         	  </i>        
+	        </div>        
+        </div>
+     
+        <div class="item">        
+	        <div>
+	          <span class="title">Buyer Name</span>
+	          <p class="description">{{purchaseAndSale['BuyerName']}}</p>
+	          <i ng-show="IsBuyerFile" class="icon ion-android-document pointer"
+	             ng-click="getFile(purchaseAndSale['PropertyId'], 2)" ui-sref="app.slider" >
+	          </i>         
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Is Funds In Escrow</span>
+	          <p class="description">
+	          	{{purchaseAndSale['IsFundsInEscrow'] == 1 ? "Yes" : "No"}}
+	          </p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Escrow Attorney</span>
+	          <p class="description">{{purchaseAndSale['EscrowAttorney']}}</p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Closign Date</span>
+	          <p class="description">{{purchaseAndSale['ClosignDate']}}</p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Layer Name</span>
+	          <p class="description">{{purchaseAndSale['LayerName']}}</p>
+	        </div>
+        </div>
+      
+        <div ng-show="IsSignedDocsFile" class="item">
+	        <div>
+	          <span class="title">Signed Docs</span>
+	           <i class="icon ion-android-document pointer"
+	              ng-click="getFile(purchaseAndSale['PropertyId'], 3)" ui-sref="app.slider" >
+	           </i>         
+	        </div>
+        </div>
+    
+        <div class="item">
+	        <div>
+	          <span class="title">Balance</span>
+	          <p class="description">{{purchaseAndSale['Balance']}}</p>
+	          <i ng-show="IsBalanceFile" class="icon ion-android-document pointer"
+	             ng-click="getFile(purchaseAndSale['PropertyId'], 5)" ui-sref="app.slider" >
+	          </i>         
+	        </div>
+        </div>
+      
+        <div ng-show="IsFilesTo" class="item">
+	        <div>
+	          <span class="title">Files To S‌ign</span>
+	          <i class="icon ion-android-document pointer" 
+	          	 ng-click="getFile(purchaseAndSale['PropertyId'], 4)" ui-sref="app.slider">
+	          </i>         
+	        </div>
+        </div>
+      
+	    <div class="item">
+	        <div>
+	          <span class="title">Closed</span>
+	          <p class="description">{{purchaseAndSale['Closed']}}</p>
+	        </div>
+        </div>
+      
+        <div ng-show="showPurchaseNote" class="item">
+	        <div>
+	          <span class="title">Note</span>
+	          <p class="description">{{purchaseAndSale['Note']}}</p>
+	        </div>
+	    </div>
+	</div>
+	<!-- END Purchase -->
+	
+	<!-- START Closing -->
+	<div id="closing">
+		<h3>Closing</h3>
+		
+		<div class="item">        
+	        <div>
+	          <span class="title text_type_bold">Property Name</span>
+	          <p class="description">{{closing['PropertyName']}}</p>
+	          <i ng-show="IsClosingHasFile" class="icon ion-android-document pointer"
+	          	 ng-click="getFile(closing['PropertyId'], 23)" ui-sref="app.slider" >
+	          </i>         
+	        </div>
+        </div>
+     
+        <div class="item">
+	        <div>
+	          <span class="title">PW File Open</span>
+	          <p class="description">
+	          	{{closing['PWFileOpen'] == 1 ? "Yes" : "No"}}
+	          </p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Walk Throgh</span>
+	          <p class="description">
+	          	{{closing['WalkThrogh'] == 1 ? "Yes" : "No"}}
+	          </p>
+	          <i ng-show="IsWalkThroghFile" class="icon ion-android-document pointer"
+	          	 ng-click="getFile(closing['PropertyId'], 6)" ui-sref="app.slider" >
+	          </i>         
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Insurance</span>
+	          <p class="description">
+	          	{{closing['Insurance'] == 1 ? "Yes" : "No"}}
+	          </p>
+	          <i ng-show="IsInsuranceFile" class="icon ion-android-document pointer"
+	          	 ng-click="getFile(closing['PropertyId'], 7)" ui-sref="app.slider" >
+	          </i>
+	        </div>
+        </div>
+    	
+        <div ng-show="IsClosingDocsFile" class="item">
+	        <div>
+	          <span class="title">Closing Docs</span>
+	          <p class="description"></p>
+	          <i class="icon ion-android-document pointer"
+	          	 ng-click="getFile(closing['PropertyId'], 8)" ui-sref="app.slider" >
+	          </i>         
+	        </div>
+        </div>
+    
+        <div ng-show="showClosingNote" class="item">
+	        <div>
+	          <span class="title">Note</span>
+	          <p class="description">{{closing['Note']}}</p>
+	        </div>
+        </div>      
+    </div>    
+	<!-- END Closing -->
+	
+	<!-- START Renovation -->
+	<div id="renovation">
+		<h3>Renovation</h3>
+		
+		<div class="item">
+	        <div>
+	          <span class="title text_type_bold">Property Name</span>
+	          <p class="description">{{renovation['PropertyName']}}</p>
+	          <i ng-show="isHasRenovationFile" class="icon ion-android-document pointer"
+	             ng-click="getFile(renovation['PropertyId'], 24)" ui-sref="app.slider" >
+	          </i>    
+	        </div>
+        </div>
+     
+        <div class="item">
+	        <div>
+	          <span class="title">Is Sent Funds</span>
+	          <p class="description">
+	          	{{renovation['IsSentFunds'] == 1 ? "Yes" : "No"}}
+	          </p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Funds Sent</span>
+	          <p class="description">{{renovation['FundsSent']}}</p>
+	          <i ng-show="IsFundsSentFile" class="icon ion-android-document pointer"
+	             ng-click="getFile(renovation['PropertyId'], 9)" ui-sref="app.slider" >
+	          </i>    
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Work Estimate</span>
+	          <p class="description">{{renovation['WorkEstimate']}}</p>
+	          <i ng-show="IsWorkEstimateFile" class="icon ion-android-document pointer"
+	             ng-click="getFile(renovation['PropertyId'], 10)" ui-sref="app.slider" >
+	          </i>   
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Start Date</span>
+	          <p class="description">{{renovation['StartDate']}}</p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">End Date</span>
+	          <p class="description">{{renovation['FinishDate']}}</p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">First Payment</span>
+	          <p class="description">
+	          	{{renovation['Payment1'] == 1 ? "Yes" : "No"}}
+	          </p>
+	          <i ng-show="IsPayment1File" class="icon ion-android-document pointer"
+	             ng-click="getFile(renovation['PropertyId'], 11)" ui-sref="app.slider">
+	          </i>  
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Second Payment</span>
+	          <p class="description">
+	          	{{renovation['Payment2'] == 1 ? "Yes" : "No"}}
+	          </p>
+	          <i ng-show="IsPayment2File" class="icon ion-android-document pointer"
+	             ng-click="getFile(renovation['PropertyId'], 12)" ui-sref="app.slider"> 
+	          </i>  
+	        </div>
+        </div>
+      
+        <div class="item">
+   	        <div>
+	          <span class="title">Third Payment</span>
+	          <p class="description">
+	          	{{renovation['Payment3'] == 1 ? "Yes" : "No"}}
+	          </p>
+	          <i ng-show="IsPayment3File" class="icon ion-android-document pointer"
+	             ng-click="getFile(renovation['PropertyId'], 13)" ui-sref="app.slider">
+	          </i>  
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">CofO</span>
+	          <p class="description">
+	          	{{renovation['CofO'] == 1 ? "Yes" : "No"}}
+	          </p>
+	          <i ng-show="IsCOFOFile" class="icon ion-android-document pointer"
+	             ng-click="getFile(renovation['PropertyId'], 14)" ui-sref="app.slider">
+	          </i>  
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">CofO Date</span>
+	          <p class="description">{{renovation['CofODate']}}</p>
+	        </div>
+        </div>
+      
+        <div ng-show="showRenovationNote" class="item">
+	        <div>
+	          <span class="title">Note</span>
+	          <p class="description">{{renovation['Note']}}</p>
+	        </div>
+        </div>
+	</div>
+	<!-- END Renovation -->
+	
+	<!-- START Leasing -->
+	<div id="leasing">
+		<h3>Leasing</h3>
+		
+		<div class="item">
+	        <div>
+	          <span class="title text_type_bold">Property Name</span>
+	          <p class="description">{{leasing['PropertyName']}}</p>
+	          <i ng-show="IsHasLeasingFile" class="icon ion-android-document pointer"
+	             ng-click="getFile(leasing['PropertyId'], 21)" ui-sref="app.slider">
+	          </i>    
+	        </div>
+        </div>
+     
+        <div class="item">
+	        <div>
+	          <span class="title">Ready To Rent</span>
+	          <p class="description">
+	          	{{leasing['ReadyToRent'] == 1 ? "Yes" : "No"}}
+	          </p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Start Date</span>
+	          <p class="description">{{leasing['StartDate']}}</p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Estimate Rent Date</span>
+	          <p class="description">{{leasing['EstimateRentDate']}}</p>
+	        </div>
+        </div>
+      
+        <div class="item">        
+	        <div>
+	          <span class="title">Listing On Facebook</span>
+	          <p class="description">{{leasing['ListingOnFacebook']}}</p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Listing On Craigs list</span>
+	          <p class="description">{{leasing['ListingOnCraigslist']}}</p>
+	        </div>
+        </div>
+       
+        <div class="item">
+	        <div>
+	          <span class="title">Application</span>
+	          <p class="description">
+	          	{{leasing['Application'] == 1 ? "Yes" : "No"}}
+	          </p>
+	          <i ng-show="IsApplicationFile" class="icon ion-android-document pointer"
+	             ng-click="getFile(leasing['PropertyId'], 15)" ui-sref="app.slider">
+	          </i>    
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Move In Date</span>
+	          <p class="description">{{leasing['MoveInDate']}}</p>
+	        </div>
+        </div>
+      
+        <div ng-show="IsLeaseFile" class="item">
+	        <div>
+	          <span class="title">Lease</span>
+	          <p class="description">{{leasing['Lease']}}</p>
+	          <i class="icon ion-android-document pointer" 
+	             ng-click="getFile(leasing['PropertyId'], 16)" ui-sref="app.slider">
+	          </i>    
+	        </div>
+        </div>
+      
+        <div ng-show="showLeasingNote" class="item">
+	        <div>
+	          <span class="title">Note</span>
+	          <p class="description">{{leasing['Note']}}</p>
+	        </div>
+        </div>
+	</div>
+	<!-- END Leasing -->
+	
+	<!-- START Occupied -->
+	<div id="occupied">
+		<h3>Occupied</h3>
+		
+		<div class="item">
+	        <div>
+	          <span class="title text_type_bold">Property Name</span>
+	          <p class="description">{{occupied['PropertyName']}}</p>
+	          <i ng-show="IsHasOccupiedFile" class="icon ion-android-document pointer" 
+	             ng-click="getFile(occupied['PropertyId'], 20)" ui-sref="app.slider">
+	          </i>
+	        </div>
+        </div>
+     
+        <div class="item">
+	        <div>
+	          <span class="title">Portion</span>
+	          <p class="description">{{occupied['Portion']}}</p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Tenants Portion</span>
+	          <p class="description">{{occupied['TenantsPortion']}}</p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Payment Status</span>
+	          <p class="description">{{occupied['PaymentStatus']}}</p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Outstanding Balance</span>
+	          <p class="description">{{occupied['OutstandingBalance']}}</p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Maintanence</span>
+	          <p class="description">{{occupied['Maintanence']}}</p>
+	          <i ng-show="IsMaintanenceFile" class="icon ion-android-document pointer"
+	          	 ng-click="getFile(occupied['PropertyId'], 17)" ui-sref="app.slider">
+	          </i>
+	        </div>
+        </div>
+      
+        <div class="item">        
+	        <div>
+	          <span class="title">Eviction</span>
+	          <p class="description">
+	          	{{occupied['Eviction'] == 1 ? "Yes" : "No"}}
+	          </p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Eviction Date</span>
+	          <p class="description">{{occupied['EvictionDate']}}</p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Eviction Note</span>
+	          <p class="description">{{occupied['EvictionNote']}}</p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Going To Be Vacent</span>
+	          <p class="description">{{occupied['GoingToBeVacent']}}</p>
+	        </div>
+        </div>
+      
+	    <div ng-show="showOccupiedNote" class="itemt">	        
+	        <div>
+	          <span class="title">Note</span>
+	          <p class="description">{{occupied['Note']}}</p>
+	        </div>
+	    </div>
+	</div>
+	<!-- END Occupied -->
+	
+	<!-- START Eviction -->
+	<div id="eviction">
+		<h3>Eviction</h3>
+		
+		<div class="item">
+	        <div>
+	          <span class="title text_type_bold">Property Name</span>
+	          <p class="description">{{eviction['PropertyName']}}</p>
+	          <i ng-show="IsHasEvictionFile" class="icon ion-android-document pointer"
+	             ng-click="getFile(eviction['PropertyId'], 19)" ui-sref="app.slider" >
+	          </i>
+	        </div>
+        </div>
+     
+        <div class="item">
+	        <div>
+	          <span class="title">Tenant Name</span>
+	          <p class="description">{{eviction['TenantName']}}</p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Filed</span>
+	          <p class="description">
+	          	{{eviction['Filed'] == 1 ? "Yes" : "No"}}
+	          </p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Published</span>
+	          <p class="description">
+	          	{{eviction['Published'] == 1 ? "Yes" : "No"}}
+	          </p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Is Court Date</span>
+	          <p class="description">
+	          	{{eviction['IsCourtDate'] == 1 ? "Yes" : "No"}}
+	          </p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Court Date</span>
+	          <p class="description">{{eviction['CourtDate']}}</p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Outcome And Status</span>
+	          <p class="description">{{eviction['OutcomeAndStatus']}}</p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Is Removed</span>
+	          <p class="description">
+	          	{{eviction['IsRemoved'] == 1 ? "Yes" : "No"}}
+	          </p>
+	        </div>
+        </div>
+      
+        <div class="item">
+	        <div>
+	          <span class="title">Removed Date</span>
+	          <p class="description">{{eviction['RemovedDate']}}</p>
+	        </div>
+        </div>
+      
+        <div ng-show="showEvictionNote" class="item">
+	        <div>
+	          <span class="title">Note</span>
+	          <p class="description">{{eviction['Note']}}</p>
+	        </div>
+        </div>
+	</div>
+	<!-- END Eviction -->
+  </ion-content>
+</ion-view>
+

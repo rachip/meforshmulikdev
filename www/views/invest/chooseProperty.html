@@ -1,0 +1,26 @@
+
+
+<ion-view>
+ <ion-nav-title>
+      <img class="investText" src="css/img/investText.png">
+      
+
+    </ion-nav-title>
+
+ <ion-pane>
+  <ion-content lazy-scroll has-header="true"> 
+   <div ng-repeat="propertyImage_item in properties">
+          <div class="col col-50-p">
+                  <a class="feed-category" ng-click="chooseMarketingProperty(propertyImage_item.PropertyId)">
+                  <div class="pre_img">
+                    <span class="markt-title animated faedOutDown">{{propertyImage_item.PropertyName}}</span>
+                    <img image-lazy-src="http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/uploads/{{propertyImage_item.FileName}}" image-lazy-distance-from-bottom-to-load="-200"> </div>
+                  </div>
+                </a>
+            </div>
+          </div>
+      </div>
+    </div>
+     </ion-pane>
+  </ion-content>
+</ion-view>
